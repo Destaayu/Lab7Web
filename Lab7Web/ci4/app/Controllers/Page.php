@@ -1,39 +1,30 @@
 <?php
-
 namespace App\Controllers;
-
-use App\Models\ArtikelModel;
-use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Page extends BaseController
 {
     public function about()
     {
         return view('about', [
-            'title'   => 'Tentang Saya',
-            'content' => 'Halo! Saya adalah Mahasiswi UPB'
-        ]);
-    }
-
-    public function artikel($slug)
-    {
-        $model = new ArtikelModel();
-        $artikel = $model->where('slug', $slug)->first();
-
-        if (!$artikel) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        $title = $artikel['judul'];
-
-        return view('artikel', compact('artikel', 'title'));
+            'title' => 'Halaman About',
+            'content' => 'Ini adalah halaman about yang menjelaskan tentang isi
+           halaman ini.'
+            ]);
+         
     }
 
     public function contact()
     {
-        return view('contact', [
-            'title'   => 'Hubungi Saya',
-            'content' => 'ig : afifahmisky'
-        ]);
+        echo "Ini halaman Contact";
+    }
+
+    public function faqs()
+    {
+        echo "Ini halaman FAQ";
+    }
+
+    public function tos()
+    {
+        echo "Ini halaman Term of Services";
     }
 }

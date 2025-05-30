@@ -6,16 +6,19 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->setAutoRoute(false);
+// Routing halaman umum
+$routes->get('/', 'Home::index');
+$routes->get('/about', 'Page::about');
+$routes->get('/contact', 'Page::contact');
 
-$routes->get('/page', 'Home::index');
-$routes->get('page/home', 'Home::index');
-$routes->get('page/artikel/(:any)', 'Page::artikel/$1');
-$routes->get('page/about', 'Page::about',);
-$routes->get('page/contact', 'Page::contact');
+// Routing admin artikel
+$routes->get('/artikel/(:any)', 'Artikel::view/$1');
+$routes->group('admin',['filter' => 'auth'], function($routes) {
+    $routes->get('artikel', 'Artikel::view/$1');
+    $routes->add('artikel/add', 'Artike;::add');
+    $routes->add('artikel/edit/(:any)', 'Artikel::edit/$1');
+    $routes->get('artikel/delete/(:any)', 'Artikel::delete/$1');
+
+});
 
 
-$routes->get('admin', 'Artikel::admin_index');
-$routes->add('admin/add', 'Artikel::add');
-$routes->add('admin/edit/(:num)', 'Artikel::edit/$1');
-$routes->get('admin/delete/(:any)', 'Artikel::delete/$1');
